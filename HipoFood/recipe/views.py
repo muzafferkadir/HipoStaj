@@ -8,6 +8,7 @@ from django.contrib.auth.forms import *
 from django.contrib.auth import *
 from django.contrib.auth.decorators import *
 from django.http import *
+from django.shortcuts import redirect
 
 class RecipeListView(ListView):
 
@@ -22,16 +23,21 @@ def ListingRecipes(request):
 
 def NewRecipe(request):
     form = RecipeForm()
-    return render(request, 'new.html', {'form': form})
     if request.method == "POST":
         form = RecipeForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
-            post.author = request.user
-            post.published_date = timezone.now()
+            #post.user = request.user
+            #post.published_date = timezone.now()
             post.save()
+            return redirect('recipeList.html')
+        else:
+
+            print("asdasdad")   
     else:
         form = RecipeForm()
+    return render(request, 'new.html', {'form': form})
+
 
 
 def LoginPage(request):
