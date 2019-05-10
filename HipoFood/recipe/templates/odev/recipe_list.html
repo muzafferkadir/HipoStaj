@@ -1,0 +1,22 @@
+<a href="{% url 'login' %}"><span> Giriş yap </span></a></br>
+
+{% if user.is_authenticated %}
+<li>User: {{ user.get_username }}</li>
+<a href="{% url 'recipe_new' %}"><span> yeni tarif </span></a>
+{% else %}
+
+{% endif %}
+
+<p> {{ user.id }}</p>
+
+{% for recipe in recipes %}
+<div class="post">
+    <h1> User: {{ recipe.user }}</h1>
+    <h1> İsim: {{ recipe.name }}</h1>
+    <img src=" {{ recipe.image.url }} " alt="image" with="100px" height="100px">
+    <h1> Ayrıntı: {{ recipe.description }}</h1>
+    <h1> Zorluk: {{ recipe.difficulty }}</h1>
+    <h1> İngredients: {{ recipe.ingredients }}</h1>
+    <p> Zaman: {{ recipe.time|linebreaksbr }}</p>
+</div>
+{% endfor %}
