@@ -26,7 +26,6 @@ class Recipe(models.Model):
     image = models.ImageField(upload_to = 'recipe/')
     difficulty = models.CharField(max_length=45, choices=DIFFICULTY)
     ingredients = models.ManyToManyField(Ingredient)
-    votes = models.ManyToManyField(User, related_name='upvoted_recipe')
     time = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

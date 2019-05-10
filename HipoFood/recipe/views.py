@@ -16,13 +16,13 @@ class RecipeListView(ListView):
     template_name = '/'
 
 
-def recipe_list(request):
+def ListingRecipes(request):
     recipes = Recipe.objects.all()
-    return render(request, 'odev/recipe_list.html', {'recipes' : recipes})
+    return render(request, 'recipeList.html', {'recipes' : recipes})
 
-def recipe_new(request):
+def NewRecipe(request):
     form = RecipeForm()
-    return render(request, 'odev/recipe_edit.html', {'form': form})
+    return render(request, 'new.html', {'form': form})
     if request.method == "POST":
         form = RecipeForm(request.POST)
         if form.is_valid():
@@ -34,7 +34,7 @@ def recipe_new(request):
         form = RecipeForm()
 
 
-def loginPage(request):
+def LoginPage(request):
     form = AuthenticationForm
     if(request.method=='POST'):
         username = request.method['username']
@@ -43,12 +43,12 @@ def loginPage(request):
         if(giris_kontrol.is_valid()):
             kullanici = authenticate(username=username,password=password)
             login(request,kullanici)
-            return HttpResponseRedirect('/bilgi/')
-    return render(request,'giris.html',locals())
+            return HttpResponseRedirect('/')
+    return render(request,'login.html',locals())
  
-def bilgi(request):
-    oku = request.user.id
-    if(not oku):
-        return HttpResponseRedirect('/')
-    return render(request,'bilgi.html',locals())
+#def bilgi(request):
+#    oku = request.user.id
+#    if(not oku):
+#        return HttpResponseRedirect('/')
+#    return render(request,'bilgi.html',locals())
 

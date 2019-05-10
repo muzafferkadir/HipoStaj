@@ -1,8 +1,8 @@
-<a href="{% url 'login' %}"><span> Giriş yap </span></a></br>
+<a href="{% url 'Login' %}"><span> Giriş yap </span></a></br>
 
 {% if user.is_authenticated %}
 <li>User: {{ user.get_username }}</li>
-<a href="{% url 'recipe_new' %}"><span> yeni tarif </span></a>
+<a href="{% url 'New' %}"><span> yeni tarif </span></a>
 {% else %}
 
 {% endif %}
