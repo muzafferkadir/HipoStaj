@@ -3,7 +3,7 @@ from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView
 from django.utils import timezone
 from .models import Recipe
-from .forms import RecipeForm
+from .forms import RecipeForm,NewUserForm
 from django.contrib.auth import authenticate,login
 from django.contrib.auth.forms import AuthenticationForm
 
@@ -35,7 +35,17 @@ def NewRecipe(request):
         form = RecipeForm()
     return render(request, 'new.html', {'form': form})
 
-
+def NewUser(request):
+    form = NewUserForm()
+    if request.method == "POST":
+        form = NewUserForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            return redirect('recipeList.html')
+    else:
+        form = NewUserForm()
+    return render(request,'register.html',{'form':form})
 
 def LoginPage(request):
     if request.method == 'POST':
@@ -51,13 +61,3 @@ def LoginPage(request):
     return render(request = request,
                     template_name = "login.html",
                     context={"form":form})
-    #username = request.POST.get('username')
-    #password = request.POST.get('password')
-    #user = authenticate(request,username=username,password=password)
-    #if user is not None:
-    #    login(request,user)
-    #    return render(request,'login.html',locals())
-    #else:
-    #    print("HATALI GİRİŞ")
-    #    return render(request,'login.html',locals())
-

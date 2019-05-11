@@ -8,4 +8,5 @@ urlpatterns = [
     path('', views.ListingRecipes, name='Recipes'),
     path('recipe/new', views.NewRecipe, name='New'),
     path('login',views.LoginPage,name ='Login'),
+    path('register',views.NewUser,name='Register')
 ]
