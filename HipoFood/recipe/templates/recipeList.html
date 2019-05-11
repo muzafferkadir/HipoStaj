@@ -1,21 +1,22 @@
 {% if user.is_authenticated %}
-<li>User: {{ user.get_username }}</li>
-<a href="{% url 'New' %}"><span> yeni tarif </span></a>
-<a href="{% url 'Logout' %}"><span>Çıkış yap </span></a>
+<li>User: {{ user.get_username }}({{ user.id }})</li>
+<a href="{% url 'New' %}"><span>New Recipe</span></a></br>
+<a href="{% url 'Logout' %}"><span>Logout</span></a>
 {% else %}
-<a href="{% url 'Login' %}"><span> Giriş yap </span></a></br>
+<a href="{% url 'Login' %}"><span>Login</span></a></br>
 {% endif %}
-
-<p> {{ user.id }}</p>
 
 {% for recipe in recipes %}
 <div class="post">
     <h1> User: {{ recipe.user }}</h1>
     <h1> İsim: {{ recipe.name }}</h1>
+    {% if recipe.image %}
     <img src=" {{ recipe.image.url }} " alt="image" with="100px" height="100px">
+    {% endif %}
     <h1> Ayrıntı: {{ recipe.description }}</h1>
     <h1> Zorluk: {{ recipe.difficulty }}</h1>
-    <h1> İngredients: {{ recipe.ingredients }}</h1>
-    <p> Zaman: {{ recipe.time|linebreaksbr }}</p>
+    <h1> Ingredients: {{ recipe.ingredients.all.filter }}</h1>
+    <h1> Zaman: {{ recipe.time|linebreaksbr }}</h1>
+    <hr>
 </div>
 {% endfor %}

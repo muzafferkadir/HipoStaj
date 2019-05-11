@@ -10,5 +10,4 @@ urlpatterns = [
     path('login',views.LoginPage,name ='Login'),
     path('logout',views.LogoutPage,name='Logout'),
     path('register',views.NewUser,name='Register'),
-
 ]

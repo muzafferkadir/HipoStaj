@@ -7,11 +7,11 @@ class RecipeForm(forms.ModelForm):
 
     class Meta:
         model = Recipe
-        fields = ('user', 'name', 'description','image','difficulty','ingredients',
+        fields = ('name', 'description','image','difficulty','ingredients',
         )
+
 class NewUserForm(UserCreationForm):
     email = forms.EmailField(required=True)
-
     class Meta:
         model = User
         fields = ("username", "email", "password1", "password2")

@@ -24,10 +24,9 @@ def NewRecipe(request):
         form = RecipeForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
-            #post.user = request.user
-            #post.published_date = timezone.now()
+            post.user = request.user
             post.save()
-            return redirect('recipeList.html')
+            return redirect('/')
         else:
 
             print("asdasdad")   
@@ -42,7 +41,7 @@ def NewUser(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
-            return redirect('recipeList.html')
+            return redirect('/')
     else:
         form = NewUserForm()
     return render(request,'register.html',{'form':form})
