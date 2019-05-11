@@ -20,8 +20,12 @@
     {% endif %}
     <h1> Ayrıntı: {{ recipe.description }}</h1>
     <h1> Zorluk: {{ recipe.difficulty }}</h1>
-    <h1> Ingredients: {{ recipe.ingredients.all.filter }}</h1>
-    <h1> Zaman: {{ recipe.time|linebreaksbr }}</h1>
+    <h1>Ingredients:
+    {% for i in recipe.ingredients.all %}
+    {{ i }},
+    {% endfor %}
+    </h1>
+    <h1> Zaman: {{ recipe.time|date:"d M Y h:m" }}</h1>
     <hr>
 </div>
 {% endfor %}
