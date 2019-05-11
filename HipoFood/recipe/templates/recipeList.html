@@ -6,6 +6,11 @@
 <a href="{% url 'Login' %}"><span>Login</span></a></br>
 {% endif %}
 
+<form class="navbar" role="search" method="GET" action="">
+    <input class="form-control" type="text" name="q" placeholder="Search in recipes">
+    <input class="btn" type="submit" value="Search">
+  </form>
+
 {% for recipe in recipes %}
 <div class="post">
     <h1> User: {{ recipe.user }}</h1>

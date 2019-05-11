@@ -7,16 +7,15 @@ from .forms import RecipeForm,NewUserForm
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.core.paginator import Paginator
-
-class RecipeListView(ListView):
-
-    model = Recipe
-    paginate_by = 2  # if pagination is desired
-    template_name = '/'
-
+from django.db.models import Q
 
 def ListingRecipes(request):
     recipes = Recipe.objects.all()
+    query = request.GET.get('q')
+    if query:
+        recipes = recipes.filter(Q(name__icontains = query)|
+                                Q(description__icontains = query))
+
     pagination = Paginator(recipes,4)
     page = request.GET.get('page')
     RecipeList = pagination.get_page(page)
