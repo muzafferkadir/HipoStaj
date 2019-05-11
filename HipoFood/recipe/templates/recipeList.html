@@ -1,6 +1,7 @@
 {% if user.is_authenticated %}
 <li>User: {{ user.get_username }}</li>
 <a href="{% url 'New' %}"><span> yeni tarif </span></a>
+<a href="{% url 'Logout' %}"><span>Çıkış yap </span></a>
 {% else %}
 <a href="{% url 'Login' %}"><span> Giriş yap </span></a></br>
 {% endif %}

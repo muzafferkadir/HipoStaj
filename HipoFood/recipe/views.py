@@ -4,7 +4,7 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.utils import timezone
 from .models import Recipe
 from .forms import RecipeForm,NewUserForm
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.forms import AuthenticationForm
 
 class RecipeListView(ListView):
@@ -61,3 +61,7 @@ def LoginPage(request):
     return render(request = request,
                     template_name = "login.html",
                     context={"form":form})
+
+def LogoutPage(request):
+    logout(request)
+    return redirect('/')
