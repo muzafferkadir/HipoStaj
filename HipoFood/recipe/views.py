@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView,CreateView, UpdateView
 from django.views.generic.edit import CreateView, UpdateView
 from django.utils import timezone
 from .models import Recipe
@@ -24,15 +24,13 @@ def ListingRecipes(request):
 def NewRecipe(request):
     form = RecipeForm()
     if request.method == "POST":
-        form = RecipeForm(request.POST)
+        form = RecipeForm(request.POST,request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
             post.user = request.user
             post.save()
+            form.save_m2m()
             return redirect('/')
-        else:
-
-            print("asdasdad")   
     else:
         form = RecipeForm()
     return render(request, 'new.html', {'form': form})
