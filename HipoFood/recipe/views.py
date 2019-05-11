@@ -6,6 +6,7 @@ from .models import Recipe
 from .forms import RecipeForm,NewUserForm
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.forms import AuthenticationForm
+from django.core.paginator import Paginator
 
 class RecipeListView(ListView):
 
@@ -16,7 +17,10 @@ class RecipeListView(ListView):
 
 def ListingRecipes(request):
     recipes = Recipe.objects.all()
-    return render(request, 'recipeList.html', {'recipes' : recipes})
+    pagination = Paginator(recipes,4)
+    page = request.GET.get('page')
+    RecipeList = pagination.get_page(page)
+    return render(request, 'recipeList.html', {'recipes' : RecipeList})
 
 def NewRecipe(request):
     form = RecipeForm()
