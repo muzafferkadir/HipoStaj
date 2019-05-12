@@ -1,8 +1,12 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
 <a href="{% url 'Recipes' %}">Main Page</a>
 <h1>New Recipe</h1>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form|crispy }}
         <button type="submit" class="save btn btn-default">Submit</button>
     </form><br>
-
+{% endblock%}
