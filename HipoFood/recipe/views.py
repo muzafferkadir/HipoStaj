@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.views.generic import ListView, DetailView,CreateView, UpdateView
 from django.views.generic.edit import CreateView, UpdateView
 from django.utils import timezone
-from .models import Recipe
+from .models import Recipe,Ingredient
 from .forms import RecipeForm,NewUserForm
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.forms import AuthenticationForm
