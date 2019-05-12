@@ -1,14 +1,18 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
 {% if user.is_authenticated %}
-<li>User: {{ user.get_username }}({{ user.id }})</li>
+<span>User: {{ user.get_username }}({{ user.id }})</span></br>
 <a href="{% url 'New' %}"><span>New Recipe</span></a></br>
 <a href="{% url 'Logout' %}"><span>Logout</span></a>
 {% else %}
 <a href="{% url 'Login' %}"><span>Login</span></a></br>
 {% endif %}
 
-<form class="navbar" role="search" method="GET" action="">
-    <input class="form-control" type="text" name="q" placeholder="Search in recipes">
-    <input class="btn" type="submit" value="Search">
+<form role="search" method="GET" action="">
+    <input type="text" name="q" placeholder="Search in recipes">
+    <input class="btn btn-info" type="submit" value="Search">
   </form>
 
 {% for recipe in recipes %}
@@ -25,7 +29,7 @@
     {{ i }},
     {% endfor %}
     </h1>
-    <h1> Zaman: {{ recipe.time|date:"d M Y h:m" }}</h1>
+    <h1> Zaman: {{ recipe.time|date:"d M Y h:i" }}</h1>
     <hr>
 </div>
 {% endfor %}
@@ -46,3 +50,4 @@
         {% endif %}
     </span>
 </div>
+{% endblock %}
