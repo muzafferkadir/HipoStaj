@@ -1,19 +1,17 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+
+{% block nav %}
+<form class="form-inline" role="search" method="GET" action="">
+        <div class="md-form my-0">
+            <input type="text" name="q" placeholder="Search in recipes">
+            <input class="btn btn-info" type="submit" value="Search">
+        </div>
+      </form>
+    </div>
+{% endblock %}
+
 {% block content %}
-
-{% if user.is_authenticated %}
-<span>User: {{ user.get_username }}({{ user.id }})</span></br>
-<a href="{% url 'New' %}"><span>New Recipe</span></a></br>
-<a href="{% url 'Logout' %}"><span>Logout</span></a>
-{% else %}
-<a href="{% url 'Login' %}"><span>Login</span></a></br>
-{% endif %}
-
-<form role="search" method="GET" action="">
-    <input type="text" name="q" placeholder="Search in recipes">
-    <input class="btn btn-info" type="submit" value="Search">
-  </form>
 
 {% for recipe in recipes %}
 <div class="post">
