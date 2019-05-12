@@ -13,24 +13,37 @@
 
 {% block content %}
 
-{% for recipe in recipes %}
-<div class="post">
-    <h1> User: {{ recipe.user }}</h1>
-    <h1> İsim: {{ recipe.name }}</h1>
-    {% if recipe.image %}
-    <img src=" {{ recipe.image.url }} " alt="image" with="100px" height="100px">
-    {% endif %}
-    <h1> Ayrıntı: {{ recipe.description }}</h1>
-    <h1> Zorluk: {{ recipe.difficulty }}</h1>
-    <h1>Ingredients:
-    {% for i in recipe.ingredients.all %}
-    {{ i }},
-    {% endfor %}
-    </h1>
-    <h1> Zaman: {{ recipe.time|date:"d M Y h:i" }}</h1>
-    <hr>
+<div class="container">
+    <div class="row">
+                {% for recipe in recipes %}
+                    <div class="col-md-6">
+
+                        {% if recipe.image %}
+                        <img class="card-img-top" src="{{ recipe.image.url }}" alt="Card image cap">
+                        {% endif %}
+                        <div class="card-body">
+                          <h5 class="card-title">{{ recipe.name }}</h5>
+                          <p class="card-text">{{ recipe.description }}</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Difficulty:{{ recipe.difficulty }}</li>
+                            <li class="list-group-item">Created at:{{ recipe.time|date:"d M Y h:i" }}</li>
+                            <li class="list-group-item">Created by:{{ recipe.user }}</li>
+                        </ul>
+                        <div class="card-body">
+                          <a class="card-link">Ingredients:</a>
+                          {% for i in recipe.ingredients.all %}
+                          <a href="#" class="btn btn-primary">{{ i }}</a>
+                          {% endfor %}
+                        </div>
+                    </div>
+
+                        {% endfor %}
+
+    </div>
+
 </div>
-{% endfor %}
+
 <div class="pagination">
     <span class="step-links">
         {% if recipes.has_previous %}
