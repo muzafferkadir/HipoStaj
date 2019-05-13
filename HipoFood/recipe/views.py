@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.views.generic import ListView, DetailView,CreateView, UpdateView
 from django.views.generic.edit import CreateView, UpdateView
 from django.utils import timezone
-from .models import Recipe,Ingredient
+from .models import Recipe,Ingredient,Like
 from .forms import RecipeForm,NewUserForm
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.forms import AuthenticationForm
@@ -19,7 +19,9 @@ def ListingRecipes(request):
     pagination = Paginator(recipes,4)
     page = request.GET.get('page')
     RecipeList = pagination.get_page(page)
+    
     return render(request, 'recipeList.html', {'recipes' : RecipeList})
+
 
 def NewRecipe(request):
     form = RecipeForm()
